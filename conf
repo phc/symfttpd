@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+require dirname(__FILE__).'/lib/bootstrap.php';
+require dirname(__FILE__).'/lib/Template.php';
+require dirname(__FILE__).'/lib/Options.php';
+
+$options = Options::getOptions();
+$new = !file_exists($options['config_file']);
+Template::writeConfig($options);
+
+log_message('Lighttpd config file '.$options['config_file'].($new ? ' created.' : ' updated.'));
